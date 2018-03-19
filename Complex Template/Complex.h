@@ -3,7 +3,7 @@
 
 // 复数类型定义
 typedef struct{
-    float real, imag;
+    float real, imag;  // 实部和虚部
 }Complex;
 
 // 函数声明
