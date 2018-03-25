@@ -1,81 +1,194 @@
-# ä½œä¸šäºŒå‚è€ƒç­”æ¡ˆ
+# ×÷Òµ¶ş²Î¿¼´ğ°¸
+
+## 2.3
+```c
+Status ListInsert(SqList &L, ElemType e)
+{
+	if (L.Length >= L.ListSize)//Ë³Ğò±í¿Õ¼ä²»×ã£¬Ìí¼Ó¿Õ¼ä
+	{
+		newbase = (ElempType *)malloc(L.elem, (L.ListSize + LISTINCREMENT) * sizeof(ElemType));
+	}
+	if (!newbase) exit(OVERFLOW);
+	L.elem = newbase;
+	L.ListSize += LISTINCREMENT;
+
+	for (int j = l.length - 1; e < l.elem[j]; j--)
+		l.elem[j + 1] = l.elem[j];
+	l.elem[j + 1] = e;
+
+
+	++L.Length;
+	return OK;
+
+}
+```
+
+## 2.4.2
+```c
+Status ListInsert(LinkList &L, ElemType e)//ÒòÎªÒªĞŞ¸ÄÖ¸ÕëLµÄÖ¸Ïò£¬ËùÒÔÒªÓÃÒıÓÃ»òÕßÖ¸ÕëµÄÖ¸Õë¡£
+{
+	p = L;
+	if (L == NULL || e<p->data)//Çé¿öÒ»£ºÁ´±íÎª¿Õ  Çé¿ö¶ş£ºÔÚÁ´±íÍ·²åÈë
+	{
+		s = (LinkList)malloc(sizeof(LNode));
+		s->data = e;
+		s->next = L;
+		L = s;	return OK;
+	}
+	while (p->next != NULL)//Çé¿öÈı£ºÔÚ±íÖĞ²åÈë,ÏÈ¶¨Î»²åÈëÎ»ÖÃ£¬È»ºó²åÈë¡£
+	{
+		if (e < p->next->data)
+		{
+			break;
+		}
+		p = p->next;
+	}
+	s = (LinkList)malloc(sizeof(LNode));
+	s->data = e;
+	s->next = p->next;
+	p->next = s;
+	return OK;
+}
+```
+
+## 2.7.1
+```c
+Status ListDelete(SqList &L)
+{
+	if (L.Length <= 1)
+		return OK;
+	//½«±í·Ö³ÉÁ½²¿·Ö£¬Ç°ÃæÏÂ±êÎª0µ½OutLength-1µÄÔªËØÂú×ãÎŞÖØ¸´Ìõ¼ş£¬ÓÃkÀ´±éÀú£»ºóÃæÎª´ı¼ì²éÔªËØ£¬ÓÃjÀ´±éÀú
+	int i = 0, j = 1, OutLength = 1;
+	while (j<L.Length)//±éÀúÕû¸öÏßĞÔ±í
+	{
+		int k;
+		for (k = 0; k < OutLength; k++)//±éÀúÎ´ÖØ¸´ÏßĞÔ±í
+		{
+			if (L.elem[k] == L.elem[j])
+			{
+				j++;
+				break;
+			}
+		}
+		if (k == OutLength)//µ±Ç°ÔªËØÎ´ÓÚÇ°ÃæµÄÔªËØÖØ¸´
+		{
+			L.elem[OutLength] = L.elem[j];
+			OutLength++;
+		}
+	}
+	L.Length = OutLength;//ĞŞ¸Ä±í³¤
+
+}
+```
+
+## 2.7.2
+```c
+Status ListDelete(SqList &L)
+{
+	if (L.Length <= 1)
+		return OK;
+	//½«±í·Ö³ÉÁ½²¿·Ö£¬Ç°ÃæÏÂ±êÎª0µ½OutLength-1µÄÔªËØÂú×ãÎŞÖØ¸´Ìõ¼ş£¬ºóÃæÎª´ı¼ì²éÔªËØ
+	//¼ì²éÊ±£¬Ö»ĞèÓëÎŞÖØ¸´ÔªËØ±íµÄ×îºóÒ»¸öÔªËØ±È½Ï¼´¿É
+	int i = 0, j = 1;
+	while (j<L.Length)
+	{
+		if (L.elem[i] == L.elem[j])	j++;
+		else
+		{
+			i++;
+			L.elem[i] = L.elem[j];
+			j++;
+		}
+	}
+	L.Length = i + 1;
+	return OK;
+}
+```
 
 ## 2.8.1
 ```c
 // 2.8.1
 Status DelDup(Linklist L)
-// åˆ é™¤æ— åºé“¾è¡¨ä¸­é‡å¤çš„å…ƒç´ ï¼Œå¸¦å¤´ç»“ç‚¹
-	for (p=L->next; p; p=p->next) {
-    // éå†é“¾è¡¨
-        for (q=p->next,r=p; q; r=q,q=q->next) {
-        // åˆ¤æ–­æ˜¯å¦æœ‰é‡å¤å…ƒç´ 
-	        if (p->data == q->data) {
-                r->next = q->next;
-                free(q);
-                q = r;
-            }
-        }
+{
+	// É¾³ıÎŞĞòÁ´±íÖĞÖØ¸´µÄÔªËØ£¬´øÍ·½áµã
+	for (p = L->next; p; p = p->next) 
+	{
+		// ±éÀúÁ´±í
+		q = p->next;
+		r = p;
+		while (q)
+		{
+			if (p->data == q->data) 
+			{
+				r->next = q->next;
+				free(q);
+				q = r;
+			}
+			r = q;
+			q = q->next;
+		
+		}
 	}
 	return OK;
 }// DelDup
 ```
 
 ##  2.8.2
-```
+```c
 // 2.8.2
 Status DelDup_Order(LinkList L)
-// åˆ é™¤éé€’å‡é“¾è¡¨çš„ä¸­çš„é‡å¤å…ƒç´ ï¼Œå¸¦å¤´ç»“ç‚¹
+// É¾³ı·Çµİ¼õÁ´±íµÄÖĞµÄÖØ¸´ÔªËØ£¬´øÍ·½áµã
 {
-    for(p=L->next; p->next; p=p->next){
-    // éå†é“¾è¡¨ï¼Œæ¯”è¾ƒç›¸é‚»é‡ç»“ç‚¹æ˜¯å¦ç›¸ç­‰
-        while(p->data == p->next->data){
-            q=p->next; p->next=q->next;
-            free(q);
-        }
-    }
-    return OK;
+	for (p = L->next; p->next; p = p->next) {
+		// ±éÀúÁ´±í£¬±È½ÏÏàÁÚÁ¿½áµãÊÇ·ñÏàµÈ
+		while (p->data == p->next->data) {
+			q = p->next; p->next = q->next;
+			free(q);
+		}
+	}
+	return OK;
 }// DelDup_Order
 ```
 
 ## 2.10
-```
+```c
 // 2.10
 Status DelPrior(LNode *s)
-// åˆ é™¤å¾ªç¯é“¾è¡¨sç»“ç‚¹çš„å‰é©±
-{ 
-    p = s;
-    // æ‰¾åˆ°sç»“ç‚¹çš„å‰é©±çš„å‰é©±p
-    while(p->next->next != s) p=p->next;
-    free(p->next);
-    p->next = s;
-    return OK;
+// É¾³ıÑ­»·Á´±ís½áµãµÄÇ°Çı
+{
+	p = s;
+	// ÕÒµ½s½áµãµÄÇ°ÇıµÄÇ°Çıp
+	while (p->next->next != s) p = p->next;
+	free(p->next);
+	p->next = s;
+	return OK;
 }// DelPrior
 ```
 
 ## 2.12
-```
+```c
 // 2.12
 Status PartOddEven(SqList L)
-// å°†é¡ºåºè¡¨ä¸­çš„å¥‡æ•°æ”¾åœ¨å·¦ä¾§ï¼Œå¶æ•°æ”¾åœ¨å³ä¾§
+// ½«Ë³Ğò±íÖĞµÄÆæÊı·ÅÔÚ×ó²à£¬Å¼Êı·ÅÔÚÓÒ²à
 {
-    temp = L.elem[0];
-    i=0; j=L.length-1; dir=0;
-    while(i<j){
-        if(dir==0){ // ä»åå‘å‰æ‰¾åˆ°ç¬¬ä¸€ä¸ªå¥‡æ•°
-            if(L.elem[j]%2==1){ // å¥‡æ•°
-                L.elem[i] = L.elem[j];
-                i++; dir=1;
-            }
-            else j--;
-        } 
-        else{ // ä»å‰å‘åæ‰¾ç¬¬ä¸€ä¸ªå¶æ•°
-            if(L.elem[i]%2==0){ // å¶æ•°
-                L.elem[j] = L.elem[i];
-                j--; dir=0;
-            }
-            else i++;
-        }
-    }// while
-    L.elem[i] = temp;
+	temp = L.elem[0];
+	i = 0; j = L.length - 1; dir = 0;
+	while (i<j) {
+		if (dir == 0) { // ´ÓºóÏòÇ°ÕÒµ½µÚÒ»¸öÆæÊı
+			if (L.elem[j] % 2 == 1) { // ÆæÊı
+				L.elem[i] = L.elem[j];
+				i++; dir = 1;
+			}
+			else j--;
+		}
+		else { // ´ÓÇ°ÏòºóÕÒµÚÒ»¸öÅ¼Êı
+			if (L.elem[i] % 2 == 0) { // Å¼Êı
+				L.elem[j] = L.elem[i];
+				j--; dir = 0;
+			}
+			else i++;
+		}
+	}// while
+	L.elem[i] = temp;
 }// PartOddEven
 ```
