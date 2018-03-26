@@ -469,68 +469,179 @@ vertical-align:1px;
 </head>
 <body>
 <h1 id="-">作业二参考答案</h1>
+<h2 id="-">较好的作业</h2>
+<ul>
+<li>排版清楚，缩进对齐</li><li>有适当注释</li><li>书写工整</li></ul>
+<h2 id="2-3">2.3</h2>
+<pre><code class="lang-c">Status ListInsert(SqList &amp;L, ElemType e)
+{
+    if (L.Length &gt;= L.ListSize)//顺序表空间不足，添加空间
+    {
+        newbase = (ElempType *)malloc(L.elem, (L.ListSize + LISTINCREMENT) * sizeof(ElemType));
+    }
+    if (!newbase) exit(OVERFLOW);
+    L.elem = newbase;
+    L.ListSize += LISTINCREMENT;
+
+    for (int j = l.length - 1; e &lt; l.elem[j]; j--)
+        l.elem[j + 1] = l.elem[j];
+    l.elem[j + 1] = e;
+
+
+    ++L.Length;
+    return OK;
+
+}
+</code></pre>
+<h2 id="2-4-2">2.4.2</h2>
+<pre><code class="lang-c">Status ListInsert(LinkList &amp;L, ElemType e)//因为要修改指针L的指向，所以要用引用或者指针的指针。
+{
+    p = L;
+    if (L == NULL || e&lt;p-&gt;data)//情况一：链表为空  情况二：在链表头插入
+    {
+        s = (LinkList)malloc(sizeof(LNode));
+        s-&gt;data = e;
+        s-&gt;next = L;
+        L = s;    return OK;
+    }
+    while (p-&gt;next != NULL)//情况三：在表中插入,先定位插入位置，然后插入。
+    {
+        if (e &lt; p-&gt;next-&gt;data)
+        {
+            break;
+        }
+        p = p-&gt;next;
+    }
+    s = (LinkList)malloc(sizeof(LNode));
+    s-&gt;data = e;
+    s-&gt;next = p-&gt;next;
+    p-&gt;next = s;
+    return OK;
+}
+</code></pre>
+<h2 id="2-7-1">2.7.1</h2>
+<pre><code class="lang-c">Status ListDelete(SqList &amp;L)
+{
+    if (L.Length &lt;= 1)
+        return OK;
+    //将表分成两部分，前面下标为0到OutLength-1的元素满足无重复条件，用k来遍历；后面为待检查元素，用j来遍历
+    int i = 0, j = 1, OutLength = 1;
+    while (j&lt;L.Length)//遍历整个线性表
+    {
+        int k;
+        for (k = 0; k &lt; OutLength; k++)//遍历未重复线性表
+        {
+            if (L.elem[k] == L.elem[j])
+            {
+                j++;
+                break;
+            }
+        }
+        if (k == OutLength)//当前元素未于前面的元素重复
+        {
+            L.elem[OutLength] = L.elem[j];
+            OutLength++;
+        }
+    }
+    L.Length = OutLength;//修改表长
+
+}
+</code></pre>
+<h2 id="2-7-2">2.7.2</h2>
+<pre><code class="lang-c">Status ListDelete(SqList &amp;L)
+{
+    if (L.Length &lt;= 1)
+        return OK;
+    //将表分成两部分，前面下标为0到OutLength-1的元素满足无重复条件，后面为待检查元素
+    //检查时，只需与无重复元素表的最后一个元素比较即可
+    int i = 0, j = 1;
+    while (j&lt;L.Length)
+    {
+        if (L.elem[i] == L.elem[j])    j++;
+        else
+        {
+            i++;
+            L.elem[i] = L.elem[j];
+            j++;
+        }
+    }
+    L.Length = i + 1;
+    return OK;
+}
+</code></pre>
 <h2 id="2-8-1">2.8.1</h2>
-<pre><code>// 2.8.1
+<pre><code class="lang-c">// 2.8.1
 Status DelDup(Linklist L)
-// 删除无序链表中重复的元素，带头结点
-    for (p=L-&gt;next; p; p=p-&gt;next) {
-    // 遍历链表
-        for (q=p-&gt;next,r=p; q; r=q,q=q-&gt;next) {
-        // 判断是否有重复元素
-            if (p-&gt;data == q-&gt;data) {
+{
+    // 删除无序链表中重复的元素，带头结点
+    for (p = L-&gt;next; p; p = p-&gt;next) 
+    {
+        // 遍历链表
+        q = p-&gt;next;
+        r = p;
+        while (q)
+        {
+            if (p-&gt;data == q-&gt;data) 
+            {
                 r-&gt;next = q-&gt;next;
                 free(q);
                 q = r;
             }
+            r = q;
+            q = q-&gt;next;
+
         }
     }
     return OK;
 }// DelDup
-</code></pre><h2 id="2-8-2">2.8.2</h2>
-<pre><code>// 2.8.2
+</code></pre>
+<h2 id="2-8-2">2.8.2</h2>
+<pre><code class="lang-c">// 2.8.2
 Status DelDup_Order(LinkList L)
 // 删除非递减链表的中的重复元素，带头结点
 {
-    for(p=L-&gt;next; p-&gt;next; p=p-&gt;next){
-    // 遍历链表，比较相邻量结点是否相等
-        while(p-&gt;data == p-&gt;next-&gt;data){
-            q=p-&gt;next; p-&gt;next=q-&gt;next;
+    for (p = L-&gt;next; p-&gt;next; p = p-&gt;next) {
+        // 遍历链表，比较相邻结点是否相等
+        while (p-&gt;data == p-&gt;next-&gt;data) {
+            q = p-&gt;next; p-&gt;next = q-&gt;next;
             free(q);
         }
     }
     return OK;
 }// DelDup_Order
-</code></pre><h2 id="2-10">2.10</h2>
-<pre><code>// 2.10
+</code></pre>
+<h2 id="2-10">2.10</h2>
+<pre><code class="lang-c">// 2.10
 Status DelPrior(LNode *s)
 // 删除循环链表s结点的前驱
-{ 
+{
     p = s;
     // 找到s结点的前驱的前驱p
-    while(p-&gt;next-&gt;next != s) p=p-&gt;next;
+    while (p-&gt;next-&gt;next != s) p = p-&gt;next;
     free(p-&gt;next);
     p-&gt;next = s;
     return OK;
 }// DelPrior
-</code></pre><h2 id="2-12">2.12</h2>
-<pre><code>// 2.12
+</code></pre>
+<h2 id="2-12">2.12</h2>
+<pre><code class="lang-c">// 2.12
 Status PartOddEven(SqList L)
 // 将顺序表中的奇数放在左侧，偶数放在右侧
 {
     temp = L.elem[0];
-    i=0; j=L.length-1; dir=0;
-    while(i&lt;j){
-        if(dir==0){ // 从后向前找到第一个奇数
-            if(L.elem[j]%2==1){ // 奇数
+    i = 0; j = L.length - 1; dir = 0;
+    while (i&lt;j) {
+        if (dir == 0) { // 从后向前找到第一个奇数
+            if (L.elem[j] % 2 == 1) { // 奇数
                 L.elem[i] = L.elem[j];
-                i++; dir=1;
+                i++; dir = 1;
             }
             else j--;
-        } 
-        else{ // 从前向后找第一个偶数
-            if(L.elem[i]%2==0){ // 偶数
+        }
+        else { // 从前向后找第一个偶数
+            if (L.elem[i] % 2 == 0) { // 偶数
                 L.elem[j] = L.elem[i];
-                j--; dir=0;
+                j--; dir = 0;
             }
             else i++;
         }
@@ -538,6 +649,7 @@ Status PartOddEven(SqList L)
     L.elem[i] = temp;
 }// PartOddEven
 </code></pre>
+
 </body>
 </html>
 <!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

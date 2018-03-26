@@ -1,10 +1,15 @@
-# ×÷Òµ¶ş²Î¿¼´ğ°¸
+# ä½œä¸šäºŒå‚è€ƒç­”æ¡ˆ
+
+## è¾ƒå¥½çš„ä½œä¸š
+- æ’ç‰ˆæ¸…æ¥šï¼Œç¼©è¿›å¯¹é½
+- æœ‰é€‚å½“æ³¨é‡Š
+- ä¹¦å†™å·¥æ•´
 
 ## 2.3
 ```c
 Status ListInsert(SqList &L, ElemType e)
 {
-	if (L.Length >= L.ListSize)//Ë³Ğò±í¿Õ¼ä²»×ã£¬Ìí¼Ó¿Õ¼ä
+	if (L.Length >= L.ListSize)//é¡ºåºè¡¨ç©ºé—´ä¸è¶³ï¼Œæ·»åŠ ç©ºé—´
 	{
 		newbase = (ElempType *)malloc(L.elem, (L.ListSize + LISTINCREMENT) * sizeof(ElemType));
 	}
@@ -25,17 +30,17 @@ Status ListInsert(SqList &L, ElemType e)
 
 ## 2.4.2
 ```c
-Status ListInsert(LinkList &L, ElemType e)//ÒòÎªÒªĞŞ¸ÄÖ¸ÕëLµÄÖ¸Ïò£¬ËùÒÔÒªÓÃÒıÓÃ»òÕßÖ¸ÕëµÄÖ¸Õë¡£
+Status ListInsert(LinkList &L, ElemType e)//å› ä¸ºè¦ä¿®æ”¹æŒ‡é’ˆLçš„æŒ‡å‘ï¼Œæ‰€ä»¥è¦ç”¨å¼•ç”¨æˆ–è€…æŒ‡é’ˆçš„æŒ‡é’ˆã€‚
 {
 	p = L;
-	if (L == NULL || e<p->data)//Çé¿öÒ»£ºÁ´±íÎª¿Õ  Çé¿ö¶ş£ºÔÚÁ´±íÍ·²åÈë
+	if (L == NULL || e<p->data)//æƒ…å†µä¸€ï¼šé“¾è¡¨ä¸ºç©º  æƒ…å†µäºŒï¼šåœ¨é“¾è¡¨å¤´æ’å…¥
 	{
 		s = (LinkList)malloc(sizeof(LNode));
 		s->data = e;
 		s->next = L;
 		L = s;	return OK;
 	}
-	while (p->next != NULL)//Çé¿öÈı£ºÔÚ±íÖĞ²åÈë,ÏÈ¶¨Î»²åÈëÎ»ÖÃ£¬È»ºó²åÈë¡£
+	while (p->next != NULL)//æƒ…å†µä¸‰ï¼šåœ¨è¡¨ä¸­æ’å…¥,å…ˆå®šä½æ’å…¥ä½ç½®ï¼Œç„¶åæ’å…¥ã€‚
 	{
 		if (e < p->next->data)
 		{
@@ -57,12 +62,12 @@ Status ListDelete(SqList &L)
 {
 	if (L.Length <= 1)
 		return OK;
-	//½«±í·Ö³ÉÁ½²¿·Ö£¬Ç°ÃæÏÂ±êÎª0µ½OutLength-1µÄÔªËØÂú×ãÎŞÖØ¸´Ìõ¼ş£¬ÓÃkÀ´±éÀú£»ºóÃæÎª´ı¼ì²éÔªËØ£¬ÓÃjÀ´±éÀú
+	//å°†è¡¨åˆ†æˆä¸¤éƒ¨åˆ†ï¼Œå‰é¢ä¸‹æ ‡ä¸º0åˆ°OutLength-1çš„å…ƒç´ æ»¡è¶³æ— é‡å¤æ¡ä»¶ï¼Œç”¨kæ¥éå†ï¼›åé¢ä¸ºå¾…æ£€æŸ¥å…ƒç´ ï¼Œç”¨jæ¥éå†
 	int i = 0, j = 1, OutLength = 1;
-	while (j<L.Length)//±éÀúÕû¸öÏßĞÔ±í
+	while (j<L.Length)//éå†æ•´ä¸ªçº¿æ€§è¡¨
 	{
 		int k;
-		for (k = 0; k < OutLength; k++)//±éÀúÎ´ÖØ¸´ÏßĞÔ±í
+		for (k = 0; k < OutLength; k++)//éå†æœªé‡å¤çº¿æ€§è¡¨
 		{
 			if (L.elem[k] == L.elem[j])
 			{
@@ -70,13 +75,13 @@ Status ListDelete(SqList &L)
 				break;
 			}
 		}
-		if (k == OutLength)//µ±Ç°ÔªËØÎ´ÓÚÇ°ÃæµÄÔªËØÖØ¸´
+		if (k == OutLength)//å½“å‰å…ƒç´ æœªäºå‰é¢çš„å…ƒç´ é‡å¤
 		{
 			L.elem[OutLength] = L.elem[j];
 			OutLength++;
 		}
 	}
-	L.Length = OutLength;//ĞŞ¸Ä±í³¤
+	L.Length = OutLength;//ä¿®æ”¹è¡¨é•¿
 
 }
 ```
@@ -87,8 +92,8 @@ Status ListDelete(SqList &L)
 {
 	if (L.Length <= 1)
 		return OK;
-	//½«±í·Ö³ÉÁ½²¿·Ö£¬Ç°ÃæÏÂ±êÎª0µ½OutLength-1µÄÔªËØÂú×ãÎŞÖØ¸´Ìõ¼ş£¬ºóÃæÎª´ı¼ì²éÔªËØ
-	//¼ì²éÊ±£¬Ö»ĞèÓëÎŞÖØ¸´ÔªËØ±íµÄ×îºóÒ»¸öÔªËØ±È½Ï¼´¿É
+	//å°†è¡¨åˆ†æˆä¸¤éƒ¨åˆ†ï¼Œå‰é¢ä¸‹æ ‡ä¸º0åˆ°OutLength-1çš„å…ƒç´ æ»¡è¶³æ— é‡å¤æ¡ä»¶ï¼Œåé¢ä¸ºå¾…æ£€æŸ¥å…ƒç´ 
+	//æ£€æŸ¥æ—¶ï¼Œåªéœ€ä¸æ— é‡å¤å…ƒç´ è¡¨çš„æœ€åä¸€ä¸ªå…ƒç´ æ¯”è¾ƒå³å¯
 	int i = 0, j = 1;
 	while (j<L.Length)
 	{
@@ -110,10 +115,10 @@ Status ListDelete(SqList &L)
 // 2.8.1
 Status DelDup(Linklist L)
 {
-	// É¾³ıÎŞĞòÁ´±íÖĞÖØ¸´µÄÔªËØ£¬´øÍ·½áµã
+	// åˆ é™¤æ— åºé“¾è¡¨ä¸­é‡å¤çš„å…ƒç´ ï¼Œå¸¦å¤´ç»“ç‚¹
 	for (p = L->next; p; p = p->next) 
 	{
-		// ±éÀúÁ´±í
+		// éå†é“¾è¡¨
 		q = p->next;
 		r = p;
 		while (q)
@@ -137,10 +142,10 @@ Status DelDup(Linklist L)
 ```c
 // 2.8.2
 Status DelDup_Order(LinkList L)
-// É¾³ı·Çµİ¼õÁ´±íµÄÖĞµÄÖØ¸´ÔªËØ£¬´øÍ·½áµã
+// åˆ é™¤éé€’å‡é“¾è¡¨çš„ä¸­çš„é‡å¤å…ƒç´ ï¼Œå¸¦å¤´ç»“ç‚¹
 {
 	for (p = L->next; p->next; p = p->next) {
-		// ±éÀúÁ´±í£¬±È½ÏÏàÁÚÁ¿½áµãÊÇ·ñÏàµÈ
+		// éå†é“¾è¡¨ï¼Œæ¯”è¾ƒç›¸é‚»ç»“ç‚¹æ˜¯å¦ç›¸ç­‰
 		while (p->data == p->next->data) {
 			q = p->next; p->next = q->next;
 			free(q);
@@ -154,10 +159,10 @@ Status DelDup_Order(LinkList L)
 ```c
 // 2.10
 Status DelPrior(LNode *s)
-// É¾³ıÑ­»·Á´±ís½áµãµÄÇ°Çı
+// åˆ é™¤å¾ªç¯é“¾è¡¨sç»“ç‚¹çš„å‰é©±
 {
 	p = s;
-	// ÕÒµ½s½áµãµÄÇ°ÇıµÄÇ°Çıp
+	// æ‰¾åˆ°sç»“ç‚¹çš„å‰é©±çš„å‰é©±p
 	while (p->next->next != s) p = p->next;
 	free(p->next);
 	p->next = s;
@@ -169,20 +174,20 @@ Status DelPrior(LNode *s)
 ```c
 // 2.12
 Status PartOddEven(SqList L)
-// ½«Ë³Ğò±íÖĞµÄÆæÊı·ÅÔÚ×ó²à£¬Å¼Êı·ÅÔÚÓÒ²à
+// å°†é¡ºåºè¡¨ä¸­çš„å¥‡æ•°æ”¾åœ¨å·¦ä¾§ï¼Œå¶æ•°æ”¾åœ¨å³ä¾§
 {
 	temp = L.elem[0];
 	i = 0; j = L.length - 1; dir = 0;
 	while (i<j) {
-		if (dir == 0) { // ´ÓºóÏòÇ°ÕÒµ½µÚÒ»¸öÆæÊı
-			if (L.elem[j] % 2 == 1) { // ÆæÊı
+		if (dir == 0) { // ä»åå‘å‰æ‰¾åˆ°ç¬¬ä¸€ä¸ªå¥‡æ•°
+			if (L.elem[j] % 2 == 1) { // å¥‡æ•°
 				L.elem[i] = L.elem[j];
 				i++; dir = 1;
 			}
 			else j--;
 		}
-		else { // ´ÓÇ°ÏòºóÕÒµÚÒ»¸öÅ¼Êı
-			if (L.elem[i] % 2 == 0) { // Å¼Êı
+		else { // ä»å‰å‘åæ‰¾ç¬¬ä¸€ä¸ªå¶æ•°
+			if (L.elem[i] % 2 == 0) { // å¶æ•°
 				L.elem[j] = L.elem[i];
 				j--; dir = 0;
 			}
