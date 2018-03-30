@@ -38,4 +38,5 @@ Debugger调试功能介绍，使用程序的调试功能能够帮助我们快速
 
 ## gdb
 [gdb 调试利器](http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html)
+
 [用GDB调试程序](http://wiki.ubuntu.org.cn/%E7%94%A8GDB%E8%B0%83%E8%AF%95%E7%A8%8B%E5%BA%8F)
