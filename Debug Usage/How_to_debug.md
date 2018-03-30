@@ -26,6 +26,10 @@ Debugger调试功能介绍，使用程序的调试功能能够帮助我们快速
 ## Visual C++
 
 ## XCode
+[XCode debug cn 1](http://www.cnblogs.com/daiweilai/p/4421340.html)
 
+[XCode debug 1](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/debugging_with_xcode/chapters/about_debugging_w_xcode.html)
+
+[XCode debug cn 2](http://www.cocoachina.com/cms/wap.php?action=article&id=10358)
 
 ## gdb
