@@ -11,14 +11,14 @@ Status ListInsert(SqList &L, ElemType e)
 {
 	if (L.Length >= L.ListSize)//顺序表空间不足，添加空间
 	{
-		newbase = (ElempType *)malloc(L.elem, (L.ListSize + LISTINCREMENT) * sizeof(ElemType));
+        newbase = (ElempType *)malloc(L.elem, (L.ListSize + LISTINCREMENT) * sizeof(ElemType));
+        if (!newbase) exit(OVERFLOW);
+        L.elem = newbase;
+        L.ListSize += LISTINCREMENT;
 	}
-	if (!newbase) exit(OVERFLOW);
-	L.elem = newbase;
-	L.ListSize += LISTINCREMENT;
 
 	for (int j = l.length - 1; e < l.elem[j]; j--)
-		l.elem[j + 1] = l.elem[j];
+        l.elem[j + 1] = l.elem[j];
 	l.elem[j + 1] = e;
 
 
