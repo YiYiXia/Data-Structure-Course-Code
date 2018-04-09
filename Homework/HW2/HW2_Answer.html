@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><title>HW2_Answer.md</title><script type="text/javascript">
 //<![CDATA[
-window.__cfRocketOptions = {byc:0,p:1521556077,petok:"5d5ad7f598bb16d993bb4cddaf231eeb58ab7e85-1522033715-1800"};
+window.__cfRocketOptions = {byc:0,p:0,petok:"9fdacfee613281181d64633305fb0d5a07697854-1523286410-1800"};
 //]]>
 </script>
 <script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/935cb224/cloudflare-static/rocket.min.js"></script>
@@ -18,10 +18,10 @@ window.__cfRocketOptions = {byc:0,p:1521556077,petok:"5d5ad7f598bb16d993bb4cddaf
     <span class="hljs-keyword">if</span> (L.Length &gt;= L.ListSize)<span class="hljs-comment">//顺序表空间不足，添加空间</span>
     {
         newbase = (ElempType *)<span class="hljs-built_in">malloc</span>(L.elem, (L.ListSize + LISTINCREMENT) * <span class="hljs-keyword">sizeof</span>(ElemType));
+        <span class="hljs-keyword">if</span> (!newbase) <span class="hljs-built_in">exit</span>(OVERFLOW);
+        L.elem = newbase;
+        L.ListSize += LISTINCREMENT;
     }
-    <span class="hljs-keyword">if</span> (!newbase) <span class="hljs-built_in">exit</span>(OVERFLOW);
-    L.elem = newbase;
-    L.ListSize += LISTINCREMENT;
 
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = l.length - <span class="hljs-number">1</span>; e &lt; l.elem[j]; j--)
         l.elem[j + <span class="hljs-number">1</span>] = l.elem[j];
