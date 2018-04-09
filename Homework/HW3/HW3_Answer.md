@@ -22,9 +22,6 @@ void Transform(char suffix[], char exp[])
 }// Transform
 ```
 
-- 这里有人在处理表达式的时候采用switch结构同时处理算符的优先级。
-- 比较优先级的函数Precede()的实现。
-
 ## 3.10
 - 数据结构定义
 
@@ -38,6 +35,20 @@ typedef struct{  // 队列
     QueuePtr rear;  // 队尾指针
 }LinkQueue;
 ```
+
+- 初始化
+```c
+/* 初始化带头结点的单循环链表队列 */
+Status InitQueue(LinkQueue &Q)
+{
+    Q.rear = MakeNode(sizeof(QNode));
+    Q.rear->next = Q.rear;
+    return OK;
+}
+```
+初始化后的队列为
+
+![QueueAfterInit](./pic/3.10_1.png)
 
 - 入队
 ```c
@@ -58,7 +69,7 @@ Status EnQueue(LinkQueue &Q, QElemType e)
 /* 队列Q出队，用e返回队头 */
 Status DeQueue(LinkQueue &Q, QElemType &e)
 {
-    if(!Q.rear || Q.rear==Q.rear) return ERROR;  //队列未初始化或为空
+    if(!Q.rear || Q.rear==Q.rear->next) return ERROR;  //队列未初始化或为空
     s = Q.rear->next->next;  // 指向队头
     e = s->data;
     Q.rear->next->next = s->next;
@@ -67,8 +78,8 @@ Status DeQueue(LinkQueue &Q, QElemType &e)
     return OK;
 }
 ```
+这里需要考虑两种特殊情况，队列为空和队列中只有一个元素。
 
-- 初始化队列的示意图
 
 ## 3.11
 - 数据结构定义
@@ -101,14 +112,14 @@ Status EnQueue(SqQueue &Q, QElemType e)
 Status DeQueue(SqQueue &Q, QElemType &e)
 {
     if(Q.length==0) return ERROR; //队列为空
-    front = (Q.rear-Q.length+2+MAXQSIZE) % MAXQSIZE;
+    front = (Q.rear-Q.length+1+MAXQSIZE) % MAXQSIZE;
     e = Q.base[front];
     Q.lenth--;
     return OK;
 }
 ```
 
-- `-1%3=-1`
+- 思考：在C语言中`-1%3`等于多少，`-1`还是`2`?
 
 ## 5.1
 ```

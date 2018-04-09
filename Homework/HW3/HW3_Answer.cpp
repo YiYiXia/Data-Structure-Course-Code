@@ -54,7 +54,7 @@ Status EnQueue(LinkQueue &Q, QElemType e)
 /* 队列Q出队，用e返回队头 */
 Status DeQueue(LinkQueue &Q, QElemType &e)
 {
-    if(!Q.rear || Q.rear==Q.rear) return ERROR;  //队列未初始化或为空
+    if(!Q.rear || Q.rear==Q.rear->next) return ERROR;  //队列未初始化或为空
     s = Q.rear->next->next;  // 指向队头
     e = s->data;
     Q.rear->next->next = s->next;
@@ -89,7 +89,7 @@ Status EnQueue(SqQueue &Q, QElemType e)
 Status DeQueue(SqQueue &Q, QElemType &e)
 {
     if(Q.length==0) return ERROR; //队列为空
-    front = (Q.rear-Q.length+2+MAXQSIZE) % MAXQSIZE;
+    front = (Q.rear-Q.length+1+MAXQSIZE) % MAXQSIZE;
     e = Q.base[front];
     Q.lenth--;
     return OK;
