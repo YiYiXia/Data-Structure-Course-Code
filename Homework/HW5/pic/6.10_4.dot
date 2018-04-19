@@ -1,0 +1,12 @@
+graph "G" {
+    A--B
+    A--E
+    B--D
+    B--H
+    B--K
+    D--G
+    H--J
+    C
+    F
+    I--L
+}

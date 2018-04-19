@@ -1,0 +1,26 @@
+graph "G" {
+    A--{B,H}
+    B--C
+    B--NULLB[style="invis"]
+    NULLB[style="invis"]
+    B--D
+    D--E
+    D--NULLD[style="invis"]
+    NULLD[style="invis"]
+    D--G
+    E--NULLE[style="invis"]
+    E--F
+    H--I
+    H--NULLH[style="invis"]
+    H--NULLH1[style="invis"]
+    NULLH1[style="invis"]
+    I--J
+    I--NULLI[style="invis"]
+    NULLI[style="invis"]
+    I--K
+    K--NULLK[style="invis"]
+    K--L
+    NULLE[style="invis"]
+    NULLH[style="invis"]
+    NULLK[style="invis"]
+}

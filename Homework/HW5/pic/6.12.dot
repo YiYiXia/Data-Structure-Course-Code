@@ -1,0 +1,8 @@
+graph "G" {
+    G--{F,B}
+    F--K
+    K--{D,A,E}
+    A--I
+    B--{C,H}
+    H--J
+}
