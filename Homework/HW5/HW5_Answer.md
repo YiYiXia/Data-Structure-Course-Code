@@ -2,6 +2,7 @@
 
 ## 6.8
 - 对应的二叉树：
+
 ![6.8](./pic/6.8.png)
 - 先根遍历：`ABCEIJFGKHD`
 - 后根遍历：`BIJEFKGHCDA`
