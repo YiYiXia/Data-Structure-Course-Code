@@ -5,7 +5,7 @@
 
 ![6.8](./pic/6.8.png)
 - 先根遍历：`ABCEIJFGKHD`
-- 后根遍历：`BIJEFKGHCDA`
+- 后根遍历：`BIJEFKGHCDA`，这个地方需要看清题目“该树”是指的哪棵树...
 
 ## 6.9
 ![6.9](./pic/6.9.png)
