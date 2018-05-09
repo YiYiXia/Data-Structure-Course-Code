@@ -1,0 +1,26 @@
+graph "G" {
+    Jan -- Feb
+    Jan -- Jun
+    Feb -- Apr
+    Feb -- NULL1[style="invis"]
+    Apr -- NULL2[style="invis"]
+    Apr -- Aug
+    Aug -- NULL3[style="invis"]
+    Aug -- Dec
+    Jun -- July
+    Jun -- NULL6[style="invis"]
+    Jun -- May
+    May -- Sep
+    May -- NULL4[style="invis"]
+    Sep -- Oct
+    Sep -- NULL5[style="invis"]
+    Oct -- Nov
+    Oct -- NULL7[style="invis"]
+    NULL1[style="invis"]
+    NULL2[style="invis"]
+    NULL3[style="invis"]
+    NULL4[style="invis"]
+    NULL6[style="invis"]
+    NULL7[style="invis"]
+    NULL5[style="invis"]
+}
